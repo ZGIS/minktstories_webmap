@@ -106,7 +106,7 @@ function init () {
 
     // Parse as JSON
     var requestJSON = JSON.parse(httpGet(request));
-    // console.log(requestJSON);
+    console.log(requestJSON);
     
     var allFeatures = new ol.source.Vector();
     var mobility = new ol.source.Vector();
@@ -776,6 +776,7 @@ function init () {
          map.getView().setZoom(16);
          // Pop-Up
          overlayLayer1.setPosition(zoomPosition);
+         console.log(zoomPosition);
          overlayFeatureName1.innerHTML = "<h3>" + requestJSON.features[imageIndex + 1].properties.Name_deiner_Story + "</h3>";
          overlayFeatureContent1.innerHTML = "<p>" + requestJSON.features[imageIndex + 1].properties.Beschreibung + "</p>";
          overlayFeatureCategory1.innerHTML = "<p><i>Kategorie: "+ requestJSON.features[imageIndex + 1].properties.Zuordnung + "</i></p>";
@@ -792,6 +793,7 @@ function init () {
          map.getView().setZoom(16);
          // Pop-Up
          overlayLayer1.setPosition(zoomPosition);
+         console.log(zoomPosition);
         overlayFeatureName1.innerHTML = "<h3>" + requestJSON.features[imageIndex + 2].properties.Name_deiner_Story + "</h3>";
         overlayFeatureContent1.innerHTML = "<p>" + requestJSON.features[imageIndex + 2].properties.Beschreibung + "</p>";
         overlayFeatureCategory1.innerHTML = "<p><i>Kategorie: "+ requestJSON.features[imageIndex + 2].properties.Zuordnung + "</i></p>";
@@ -808,6 +810,7 @@ function init () {
         map.getView().setZoom(16);
         // Pop-Up
         overlayLayer1.setPosition(zoomPosition);
+       console.log(zoomPosition);
         overlayFeatureName1.innerHTML = "<h3>" + requestJSON.features[imageIndex + 3].properties.Name_deiner_Story + "</h3>";
         overlayFeatureContent1.innerHTML = "<p>" + requestJSON.features[imageIndex + 3].properties.Beschreibung + "</p>";
         overlayFeatureCategory1.innerHTML = "<p><i>Kategorie: "+ requestJSON.features[imageIndex + 3].properties.Zuordnung + "</i></p>";
