@@ -21,10 +21,11 @@
 		<!-- own js file -->
 		<script src="minkt.js"></script>
    	</head>
-
-    <body onload="init ();">
-        <div id="header"><h1>MINKT Stories Lungau</h1></div>
-        <div id="map">
+	
+	<!-- onload init() is the main js function that contains all map elements -->
+	<body onload="init ();">
+		<div id="header"><h1>MINKT Stories Lungau</h1></div>
+		<div id="map">
 			<span id="status"></span>
 			<div id="trackerbox">
 				<div class="checker">
@@ -82,6 +83,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<!-- pop-ups in the map-->
 		<div class="ol-popupMarker">
 			<span class="popup-marker" id="marker"></span>
