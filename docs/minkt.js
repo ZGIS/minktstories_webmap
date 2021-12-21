@@ -2,12 +2,12 @@ function init () {
    
     // ESRI Token for image URLs
     var token = "?token=I7TegBVc1f6x0trhZM9vqvr7h7yBhgoEyQDVQe2G4HO9g1FvBilhOcrqqxqaUMD8I7vGldeDUUmVCxySP5rCQLarp4bJWaSYS8a1fReBt7VJ8rWnLUQ7sg8s4U5W8bqI1twaQtnzJdphkP00RyJFjpHlEHpXn7sLyQsVDhd9TnDpDDfc9u7o6YowaRsiVieLrltzhD5Qvg2HKb1VO_I_Qhwm3bzZcF8I6BE7isShmzLpYuuM5ORXDpd7qfAtyRR7' ";
-    // var token = "?token=G4BQFTxq13VZ8VOAfkwJTOL5OdJagHoFS1x1--y0hnoEUr8DLw7rDz3q-0OUd9DM3MmW6gmBUg0R_hnFACGGkaOIxP1tB35S8xlCwscv0CjZNFMhwsiuafYGynM8UroMEkXKau9RCTju1G7f1vi3gyV263FOTltqJDiVkQMmKy_N4shZTdIYiMc5LMfpsBe1PXJHyWV9D3KMzSUBKMRfuqJiisEl2DvJ5UxsV2MsXFC0TOgJY-kjKhni1_j5Rp8W' ";
 
     /*
     BASE LAYERS
     */
 
+    // Bing Styles and Key
     var styles = ['Road', 'Aerial','AerialWithLabels'];
     var bingKey = 'Atoz1wDioRmjCFJbh0EYKVbNhY1FpWn2hyBGodCxBwsbWmxEP9Il16k9qcBBLXWk';
 
@@ -28,7 +28,7 @@ function init () {
                 }),
             })
         );
-    }//for
+    }
 
     //OSM layer
     var osm = new ol.layer.Tile({
@@ -106,7 +106,7 @@ function init () {
 
     // Parse as JSON
     var requestJSON = JSON.parse(httpGet(request));
-    console.log(requestJSON);
+    // console.log(requestJSON);
     
     var allFeatures = new ol.source.Vector();
     var mobility = new ol.source.Vector();
@@ -117,7 +117,7 @@ function init () {
     // Create a layer with all features but individual styling
     for (var y in requestJSON.features) {
         var feature = requestJSON.features[y];
-        var position = ol.proj.transform([feature.geometry.coordinates[0], feature.geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');
+        var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
         var point = new ol.Feature({
             geometry: new ol.geom.Point(position)
         });
@@ -139,11 +139,11 @@ function init () {
     // Distibute features in layers based on property "Zuordnung"
     for (var x in requestJSON.features) {
         var feature = requestJSON.features[x];
-        var position = ol.proj.transform([feature.geometry.coordinates[0], feature.geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');
+        var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
         //console.log(feature.geometry.coordinates);
         /* single mobility layer */
         if (feature.properties.Zuordnung == "Positiver_Mobilitätsmoment" || feature.properties.Zuordnung == "Negativer_Mobilitätsmoment") {
-            var position = ol.proj.transform([feature.geometry.coordinates[0], feature.geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');
+            var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
             var point = new ol.Feature({
             geometry: new ol.geom.Point(position)
             });
@@ -156,7 +156,7 @@ function init () {
             point.setProperties(feature.properties);
         }
         if (feature.properties.Zuordnung == "Positiver_Mobilitätsmoment" || feature.properties.Zuordnung == "Negativer_Mobilitätsmoment") {
-            var position = ol.proj.transform([feature.geometry.coordinates[0], feature.geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');
+            var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
             var point = new ol.Feature({
             geometry: new ol.geom.Point(position)
             });
@@ -168,7 +168,7 @@ function init () {
             mobility.addFeature(point);
             point.setProperties(feature.properties);
         }else if (feature.properties.Zuordnung == "Positiver_Mobilitätsmoment" || feature.properties.Zuordnung == "Negativer_Mobilitätsmoment") {
-            var position = ol.proj.transform([feature.geometry.coordinates[0], feature.geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');
+            var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
             var point = new ol.Feature({
             geometry: new ol.geom.Point(position)
             });
@@ -181,7 +181,7 @@ function init () {
             point.setProperties(feature.properties);
         }
          else if (feature.properties.Zuordnung == "Lebensort") {
-            var position = ol.proj.transform([feature.geometry.coordinates[0], feature.geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');
+            var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
             var point = new ol.Feature({
             geometry: new ol.geom.Point(position)
             }); //Feature
@@ -189,7 +189,7 @@ function init () {
             lebensort.addFeature(point);
             point.setProperties(feature.properties);
         } else if (feature.properties.Zuordnung == "Heilpflanze") {
-            var position = ol.proj.transform([feature.geometry.coordinates[0], feature.geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');
+            var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
             var point = new ol.Feature({
             geometry: new ol.geom.Point(position)
             });
@@ -197,7 +197,7 @@ function init () {
             plants.addFeature(point);
             point.setProperties(feature.properties);
         } else if (feature.properties.Zuordnung == "other") {
-            var position = ol.proj.transform([feature.geometry.coordinates[0], feature.geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');
+            var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
             var point = new ol.Feature({
             geometry: new ol.geom.Point(position)
             });
@@ -430,24 +430,6 @@ function init () {
         }
     });
 
-    /*
-    Print Button
-   
-    const print = document.getElementById("print");
-    // const legend_content = document.getElementById("legend");
-    var counter = 0;
-    print.addEventListener('click', function() {
-        counter++;
-        console.log(counter);
-        if (counter % 2 != 0) {
-            document.querySelector('#print-section').setAttribute("style", "display: flexbox;");
-            console.log("Set to flexbox");
-        } else  {
-            document.querySelector('#print-section').setAttribute("style", "display: none");
-            console.log("Set to none");
-        }
-    });
-     */
     
     /*
     ON-HOVER HIGHLIGHT
@@ -754,7 +736,7 @@ function init () {
     const media1 = document.getElementById('media1');
 
     media1.addEventListener('click', function () {
-         var zoomPosition = ol.proj.transform([requestJSON.features[imageIndex].geometry.coordinates[0], requestJSON.features[imageIndex].geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');
+         var zoomPosition = ([requestJSON.features[imageIndex].geometry.coordinates[0], requestJSON.features[imageIndex].geometry.coordinates[1]]);
          map.getView().setCenter(zoomPosition);
          map.getView().setZoom(16);
           // Pop-Up
@@ -771,12 +753,11 @@ function init () {
 
     const media2 = document.getElementById('media2');
     media2.addEventListener('click', function () {
-         var zoomPosition = ol.proj.transform([requestJSON.features[imageIndex + 1].geometry.coordinates[0], requestJSON.features[imageIndex + 1].geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');
+         var zoomPosition = ([requestJSON.features[imageIndex + 1].geometry.coordinates[0], requestJSON.features[imageIndex + 1].geometry.coordinates[1]]);
          map.getView().setCenter(zoomPosition);
          map.getView().setZoom(16);
          // Pop-Up
          overlayLayer1.setPosition(zoomPosition);
-         console.log(zoomPosition);
          overlayFeatureName1.innerHTML = "<h3>" + requestJSON.features[imageIndex + 1].properties.Name_deiner_Story + "</h3>";
          overlayFeatureContent1.innerHTML = "<p>" + requestJSON.features[imageIndex + 1].properties.Beschreibung + "</p>";
          overlayFeatureCategory1.innerHTML = "<p><i>Kategorie: "+ requestJSON.features[imageIndex + 1].properties.Zuordnung + "</i></p>";
@@ -788,12 +769,11 @@ function init () {
 
     const media3 = document.getElementById('media3');
     media3.addEventListener('click', function () {
-         var zoomPosition = ol.proj.transform([requestJSON.features[imageIndex + 2].geometry.coordinates[0], requestJSON.features[imageIndex + 2].geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');
+         var zoomPosition = ([requestJSON.features[imageIndex + 2].geometry.coordinates[0], requestJSON.features[imageIndex + 2].geometry.coordinates[1]]);
          map.getView().setCenter(zoomPosition);
          map.getView().setZoom(16);
          // Pop-Up
          overlayLayer1.setPosition(zoomPosition);
-         console.log(zoomPosition);
         overlayFeatureName1.innerHTML = "<h3>" + requestJSON.features[imageIndex + 2].properties.Name_deiner_Story + "</h3>";
         overlayFeatureContent1.innerHTML = "<p>" + requestJSON.features[imageIndex + 2].properties.Beschreibung + "</p>";
         overlayFeatureCategory1.innerHTML = "<p><i>Kategorie: "+ requestJSON.features[imageIndex + 2].properties.Zuordnung + "</i></p>";
@@ -805,12 +785,11 @@ function init () {
 
     const media4 = document.getElementById('media4');
     media4.addEventListener('click', function () {
-        var zoomPosition = ol.proj.transform([requestJSON.features[imageIndex + 3].geometry.coordinates[0], requestJSON.features[imageIndex + 3].geometry.coordinates[1]], 'EPSG:4326', 'EPSG:3857');            
+        var zoomPosition = ([requestJSON.features[imageIndex + 3].geometry.coordinates[0], requestJSON.features[imageIndex + 3].geometry.coordinates[1]]);            
         map.getView().setCenter(zoomPosition);
         map.getView().setZoom(16);
         // Pop-Up
         overlayLayer1.setPosition(zoomPosition);
-       console.log(zoomPosition);
         overlayFeatureName1.innerHTML = "<h3>" + requestJSON.features[imageIndex + 3].properties.Name_deiner_Story + "</h3>";
         overlayFeatureContent1.innerHTML = "<p>" + requestJSON.features[imageIndex + 3].properties.Beschreibung + "</p>";
         overlayFeatureCategory1.innerHTML = "<p><i>Kategorie: "+ requestJSON.features[imageIndex + 3].properties.Zuordnung + "</i></p>";
@@ -819,4 +798,5 @@ function init () {
         (imageIndex + 4) + "/attachments/" + (imageIndex + 4) + token +
         " height='200px' style = 'box-shadow: 0px 0px 5px rgba(83, 83, 83, 0.544);' >";
         })
+
 };
