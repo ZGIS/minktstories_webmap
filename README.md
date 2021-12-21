@@ -5,9 +5,6 @@ The MINKT Stories web map is an open layers web application that integrates data
 **See the Web Map Result:** <br/>
 [https://christina1281995.github.io/minktstories_webmap/](https://christina1281995.github.io/minktstories_webmap/)
 
-**GitLab Repository:** <br/>
-[https://git.sbg.ac.at/s1079105/geoappdev-webmap](https://git.sbg.ac.at/s1079105/geoappdev-webmap)
-
 **View the MINKT Stories Platform:** <br/>
 [https://minkt-stories-lungau.zgis.at/](https://minkt-stories-lungau.zgis.at/)
 
