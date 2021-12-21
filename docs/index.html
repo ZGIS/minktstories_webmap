@@ -5,7 +5,11 @@
 		<meta name="author" content="Christina Zorenböhmer, Katharina Wöhs, Niklas Jaggy" />
 		<meta name="description" Content="MINKT Lungau Project" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<!-- own stylesheet --> 
 		<link rel="stylesheet" href="minkt_style.css" type="text/css">
+		
+		<!-- Google Fonts, OpenLayers, and ol-layerswitcher --> 
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
@@ -13,6 +17,8 @@
 		<script src="https://openlayers.org/en/v5.3.0/build/ol.js" type="text/javascript"></script>
 		<script src= "ol-layerswitcher.js" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="ol-layerswitcher_custom.css">
+		
+		<!-- own js file -->
 		<script src="minkt.js"></script>
    	</head>
 
@@ -75,30 +81,6 @@
 					</div>
 				</div>
 			</div>
-
-			<!-- print map option-->
-			<!--
-			<button id="print"></button>
-			<div id="print-section" style="display: none">
-				<form class="form">
-					<label for="format">Page size </label>
-					<select id="format">
-					<option value="a0">A0 (slow)</option>
-					<option value="a1">A1</option>
-					<option value="a2">A2</option>
-					<option value="a3">A3</option>
-					<option value="a4" selected>A4</option>
-					<option value="a5">A5 (fast)</option>
-					</select>
-					<label for="resolution">Resolution </label>
-					<select id="resolution">
-					<option value="72">72 dpi (fast)</option>
-					<option value="150">150 dpi</option>
-					<option value="300">300 dpi (slow)</option>
-					</select>
-				</form>
-				<button id="export-pdf">Export PDF</button>
-			</div> -->
 		</div>
 		<!-- pop-ups in the map-->
 		<div class="ol-popupMarker">
@@ -110,8 +92,12 @@
 			<span class='popup-text' id='feature-category'></span> 
 			<span class='popup-image' id='feature-image' ></span> 
 		</div>
+	    
+	    <!-- image gallery -->
 		<div class="wrapper">
+			<!-- previous button -->
 			<a class="prev" onclick="init.changeIndex(-1);"> &#10094 </a>
+			<!-- four images displayed -->
 			<div class="media" id= "media1" style = "box-shadow: 0px 0px 7px rgba(83, 83, 83, 0.644);">
 				<div class="layers">
 					<p id='image1-text' text-align= 'center'></p>
@@ -136,7 +122,7 @@
 			  	</div>
 				<span class='gallery' id='gallery-image4'></span> 
 			</div>
-			<!-- Next and previous buttons -->
+			<!-- Next button -->
 		<a class="next" onclick= "init.changeIndex(1);" > &#10095 </a>
 		</div>
         <div id="footer"></div>
