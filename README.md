@@ -11,7 +11,6 @@ The web map is an open layers web application that integrates data collected in 
 **View the MINKT Stories Platform:** <br/>
 [https://minkt-stories-lungau.zgis.at/](https://minkt-stories-lungau.zgis.at/)
 
-
 <br/>
 
 ![image](https://user-images.githubusercontent.com/81073205/143590945-9ffa7b3e-0f4c-4597-8e14-29defc484a87.png)
@@ -19,7 +18,16 @@ The web map is an open layers web application that integrates data collected in 
 <br/>
 <br/>
 
-**Recent Updates:** 
+
+## The Concept and Spatial Data Infrastructure behind the Web Map
+<br/>
+
+![concept](https://user-images.githubusercontent.com/81073205/152963923-d81558b9-1af7-4f17-b943-cc972a8176af.png)
+
+<br/>
+<br/>
+
+## Recent Updates
 
 <br/>
 
