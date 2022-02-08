@@ -1,7 +1,9 @@
 ![Capture](https://user-images.githubusercontent.com/81073205/152940824-5ef1258c-252a-4812-8d9d-db597b0784ee.PNG)
 ## MINKT Stories Web Map
 
-The MINKT Stories web map is an open layers web application that integrates data collected in Survey123 as a WFS. The application includes pop-ups, geolocation, an interactive gallery, and layer switchers ([walkermatt-layerswitcher](https://github.com/walkermatt/ol-layerswitcher)).
+The MINKT Stories web map hosted here is the central element of a map-based platform with which the [iDEAS:lab](https://ideaslab.plus.ac.at/) in Salzburg, Austria hosts workshops to **build digial skills with young citizen scientists**.
+
+The web map is an open layers web application that integrates data collected in Survey123 as a WFS. The application includes pop-ups, geolocation, an interactive gallery, and layer switchers ([walkermatt-layerswitcher](https://github.com/walkermatt/ol-layerswitcher)).
 
 **See the Web Map Result:** <br/>
 [https://zgis.github.io/minktstories_webmap/](https://zgis.github.io/minktstories_webmap/)
