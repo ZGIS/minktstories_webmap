@@ -14,6 +14,7 @@ function init () {
     var styles = ['Road', 'Aerial','AerialWithLabels'];
     
     // Bing Key- you must request an API key for Bing 
+    // To get your own Bing Maps Key, see here: https://docs.microsoft.com/en-us/bingmaps/getting-started/bing-maps-dev-center-help/getting-a-bing-maps-key 
     var bingKey = 'Atoz1wDioRmjCFJbh0EYKVbNhY1FpWn2hyBGodCxBwsbWmxEP9Il16k9qcBBLXWk';
 
     // Use an array to group all base layers
