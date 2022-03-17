@@ -4,7 +4,6 @@ function init () {
     // Comments have been included in the code for easy understanding and reproducibility.
 
     /*
-    
     =================================== BASE LAYERS CONFIGURATION =====================================
     These layers are used as background maps, between which the user can choose. 
     We use Bing layers and Open Stree Map. 
@@ -47,7 +46,6 @@ function init () {
 
    
     /*
-    
     =================================== WEB FEATURE SERVICE LAYER CONFIGURATION =====================================
     The icons for the features are stored in the "static" folder on GitHub.
     These icons and styles are created according to the categories ("zuordnung") of the stories.
@@ -1015,5 +1013,4 @@ function init () {
     xhr.onerror = function (e) {
       console.error(xhr.statusText);
     };
-
 };
