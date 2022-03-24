@@ -215,7 +215,7 @@ function init () {
             })
         }).extend([
             layerSwitcher,
-            new ol.control.FullScreen(),
+            // new ol.control.FullScreen(),
             new ol.control.ScaleLine()
         ]),
         target: 'map',
@@ -467,155 +467,157 @@ function init () {
             
             // ===================================== TOOLS BUTTON =====================================
 
-            const tools = document.getElementById("tools");
-            var counter = 0;
-            tools.addEventListener('click', function() {
-                counter++;
-                if (counter % 2 != 0) {
-                    document.querySelector('#toolbox').setAttribute("style", "display: flexbox;");
-                } else  {
-                    document.querySelector('#toolbox').setAttribute("style", "display: none");
-                }
-            });
+            // const tools = document.getElementById("tools");
+            // var counter = 0;
+            // tools.addEventListener('click', function() {
+            //     counter++;
+            //     if (counter % 2 != 0) {
+            //         document.querySelector('#toolbox').setAttribute("style", "display: flexbox;");
+            //     } else  {
+            //         document.querySelector('#toolbox').setAttribute("style", "display: none");
+            //     }
+            // });
             
 
             
             // ===================================== TOOLBOX FOR KEYWORD SEARCH =====================================
         
         
-            // --------------- KEYWORD SEARCH ---------------
-            // connect to keyword search form
-            const formKeyword = document.getElementById('keyword');
-            var searchword;
-            // prevent page from reloading 
-            function handleForm(event) { event.preventDefault(); } 
-            formKeyword.addEventListener('submit', handleForm);
+            // // --------------- KEYWORD SEARCH ---------------
+            // // connect to keyword search form
+            // const formKeyword = document.getElementById('keyword');
+            // var searchword;
+            // // prevent page from reloading 
+            // function handleForm(event) { event.preventDefault(); } 
+            // formKeyword.addEventListener('submit', handleForm);
 
-            results = [];
+            // results = [];
 
 
-            // --------------- Get value entered by user ---------------
-            formKeyword.addEventListener('submit', (event) => {
-                searchword = document.getElementById("suchwort").value.toLowerCase();
-                console.log(searchword)
-                if (searchword == "")
-                {
-                alert("Gib bitte etwas in der Suchbox ein.");
-                return false;
-                }
-                else{
-                    for (var x in requestJSON.features) {
-                        var feature = requestJSON.features[x];
+            // // --------------- Get value entered by user ---------------
+            // formKeyword.addEventListener('submit', (event) => {
+            //     searchword = document.getElementById("suchwort").value.toLowerCase();
+            //     console.log(searchword)
+            //     if (searchword == "")
+            //     {
+            //     alert("Gib bitte etwas in der Suchbox ein.");
+            //     return false;
+            //     }
+            //     else{
+            //         for (var x in requestJSON.features) {
+            //             var feature = requestJSON.features[x];
                         
-                        // format everything to lowercase and check if Beschreibung or Title contain the searchword
-                        if (feature.properties.Beschreibung.toLowerCase().includes(searchword) || feature.properties.Name_deiner_Story.toLowerCase().includes(searchword)) {
-                            console.log(feature.properties.Beschreibung);
-                            results.push((feature.properties.Name_deiner_Story, feature.properties.Beschreibung));
+            //             // format everything to lowercase and check if Beschreibung or Title contain the searchword
+            //             if (feature.properties.Beschreibung.toLowerCase().includes(searchword) || feature.properties.Name_deiner_Story.toLowerCase().includes(searchword)) {
+            //                 console.log(feature.properties.Beschreibung);
+            //                 results.push((feature.properties.Name_deiner_Story, feature.properties.Beschreibung));
                             
-                            var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
+            //                 var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
                             
-                            var point = new ol.Feature({
-                            geometry: new ol.geom.Point(position)
-                            });
-                            point.setStyle(invisible);
-                            flashing.addFeature(point)
-                        }
-                    }
-                }
+            //                 var point = new ol.Feature({
+            //                 geometry: new ol.geom.Point(position)
+            //                 });
+            //                 point.setStyle(invisible);
+            //                 flashing.addFeature(point)
+            //             }
+            //         }
+            //     }
 
-            })
+            // })
             // Distibute features in layers based on property "Zuordnung"
             
 
 
-            // ---------------- FLASH ANIMATION ----------------
-            var duration = 3000;
-            function flash(feature) {
-            var start = new Date().getTime();
-            var listenerKey;
+        //     // ---------------- FLASH ANIMATION ----------------
+        //     var duration = 3000;
+        //     function flash(feature) {
+        //     var start = new Date().getTime();
+        //     var listenerKey;
             
-            function animate(event) {
+        //     function animate(event) {
                 
-                var vectorContext = event.vectorContext;
-                var frameState = event.frameState;
-                var flashGeom = feature.getGeometry().clone();
-                var elapsed = frameState.time - start;
-                var elapsedRatio = elapsed / duration;
-                // radius will be 5 at start and 30 at end.
-                var radius = ol.easing.easeOut(elapsedRatio) * 25 + 5;
-                var opacity = ol.easing.easeOut(1 - elapsedRatio);
+        //         var vectorContext = event.vectorContext;
+        //         var frameState = event.frameState;
+        //         var flashGeom = feature.getGeometry().clone();
+        //         var elapsed = frameState.time - start;
+        //         var elapsedRatio = elapsed / duration;
+        //         // radius will be 5 at start and 30 at end.
+        //         var radius = ol.easing.easeOut(elapsedRatio) * 25 + 5;
+        //         var opacity = ol.easing.easeOut(1 - elapsedRatio);
 
-                var style = new ol.style.Style({
-                image: new ol.style.Circle({
-                    radius: radius,
-                    snapToPixel: false,
-                    stroke: new ol.style.Stroke({
-                    color: 'rgba(255, 0, 0, ' + opacity + ')',
-                    width: 0.25 + opacity
-                    })
-                })
-                });
+        //         var style = new ol.style.Style({
+        //         image: new ol.style.Circle({
+        //             radius: radius,
+        //             snapToPixel: false,
+        //             stroke: new ol.style.Stroke({
+        //             color: 'rgba(255, 0, 0, ' + opacity + ')',
+        //             width: 0.25 + opacity
+        //             })
+        //         })
+        //         });
 
-                vectorContext.setStyle(style);
-                vectorContext.drawGeometry(flashGeom);
-                if (elapsed > duration) {
-                // elapsed == 0;
-                ol.Observable.unByKey(listenerKey);
-                return;
-                }
-                // tell OpenLayers to continue postcompose animation
-                map.render();
-            }
-            listenerKey = map.on('postcompose', animate);
-            }
+        //         vectorContext.setStyle(style);
+        //         vectorContext.drawGeometry(flashGeom);
+        //         if (elapsed > duration) {
+        //             elapsed == frameState.time - new Date().getTime();
+        //             // ol.Observable.unByKey(listenerKey);
+        //             return;
+        //         }
+        //         // tell OpenLayers to continue postcompose animation
+        //         map.render();
+        //     }
+        //     listenerKey = map.on('postcompose', animate);
+        //     }
 
-            flashing.on('addfeature', function(e) {
-                flash(e.feature);
-            });
+        //     flashing.on('addfeature', function(e) {
+        //         flash(e.feature);
+        //     });
 
-        /*
-            // TIME SEARCH ---- NOT YET IMPLEMENTED 
-            // connect to keyword search form
-            const formDates = document.getElementById('dates');
-            // prevent page from reloading 
-            function handleForm(event) { event.preventDefault(); } 
-            formDates.addEventListener('submit', handleForm);
+        // /*
+        //     // TIME SEARCH ---- NOT YET IMPLEMENTED 
+        //     // connect to keyword search form
+        //     const formDates = document.getElementById('dates');
+        //     // prevent page from reloading 
+        //     function handleForm(event) { event.preventDefault(); } 
+        //     formDates.addEventListener('submit', handleForm);
 
-            // get value entered by user
-            formDates.addEventListener('submit', (event) => {
-                var start = document.getElementById("startdate").value;
-                var end = document.getElementById("enddate").value;
-                console.log(start, end);
+        //     // get value entered by user
+        //     formDates.addEventListener('submit', (event) => {
+        //         var start = document.getElementById("startdate").value;
+        //         var end = document.getElementById("enddate").value;
+        //         console.log(start, end);
 
-                // Distibute features in layers based on property "Zuordnung"
-                for (var x in requestJSON.features) {
-                    var feature = requestJSON.features[x];
-                    var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
+        //         // Distibute features in layers based on property "Zuordnung"
+        //         for (var x in requestJSON.features) {
+        //             var feature = requestJSON.features[x];
+        //             var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
 
-                    // single mobility layer
-                    if (feature.properties.CreationDate <= start && feature.properties.CreationDate >= end) {
-                        // var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
-                        // var point = new ol.Feature({
-                        // geometry: new ol.geom.Point(position)
-                        // });
-                        console.log(feature.properties.Name_deiner_Story);
-                }}})
-        */
+        //             // single mobility layer
+        //             if (feature.properties.CreationDate <= start && feature.properties.CreationDate >= end) {
+        //                 // var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
+        //                 // var point = new ol.Feature({
+        //                 // geometry: new ol.geom.Point(position)
+        //                 // });
+        //                 console.log(feature.properties.Name_deiner_Story);
+        //         }}})
+        // */
             
         
-            // --------------- CLEAR SEARCH ------------------
-            // connect to keyword search form
-            const formClear = document.getElementById('clear');
-            // prevent page from reloading 
-            function handleForm(event) { event.preventDefault(); } 
-            formClear.addEventListener('submit', handleForm);
+        //     // --------------- CLEAR SEARCH ------------------
+        //     // connect to keyword search form
+        //     const formClear = document.getElementById('clear');
+        //     // prevent page from reloading 
+        //     function handleForm(event) { event.preventDefault(); } 
+        //     formClear.addEventListener('submit', handleForm);
 
-            // when submitted, clear all features from flashing layer
-            formClear.addEventListener('submit', (event) => {
-                flashing.clear();
-                results = [];
-                console.log("form cleared");
-            })
+        //     // when submitted, clear all features from flashing layer
+        //     formClear.addEventListener('submit', (event) => {
+        //         flashing.clear();
+        //         results = [];
+        //         console.log("form cleared");
+        //     })
+
+        //     // map.addLayer(flashing);
 
 
 
