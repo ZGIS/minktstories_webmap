@@ -1,6 +1,6 @@
 function init () {
    
-    // This file contains the main functionalities of the web map. 
+    // This file contains the main functionalities of the web map.
     // Comments have been included in the code for easy understanding and reproducibility.
 
     /*
