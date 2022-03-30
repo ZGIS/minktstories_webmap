@@ -754,58 +754,13 @@ function init () {
             // --------------- Pop-Ups for Features ---------------
 
             // link container to element in html
-            const overlayContainerElement = document.querySelector('.ol-popup');
-
-            // create overlay itself
-            const overlayLayer = new ol.Overlay({
-                element: overlayContainerElement,
-                autoPan: true,
-                autoPanAnimation: {
-                    duration: 500,
-                }, 
-            })
-            map.addOverlay(overlayLayer);
-            const overlayFeatureName = document.getElementById('feature-name');
-            const overlayFeatureContent = document.getElementById('feature-content');
-            const overlayFeatureCategory = document.getElementById('feature-category');
-            const overlayFeatureImage = document.getElementById('feature-image');
-
-            // On click function to read feature-at-pixel properties and fill pop-up container elements
-            map.on('click', function (e) {
-                overlayLayer.setPosition(undefined);
-                map.forEachFeatureAtPixel(e.pixel, function(feature, layer){
-                    if (layer === allLayer || layer === plantsLayer || layer === otherLayer || layer === lebensortLayer || layer === mobilityLayer) {
-                        let clickedCoordinate = e.coordinate;
-                        let clickedFeatureName = feature.get('Name_deiner_Story');
-                        let clickedFeatureContent = feature.get('Beschreibung');
-                        let clickedFeatureCategory = feature.get('Zuordnung');
-                        let clickedFeatureID = feature.get('ObjectID');
-                        overlayLayer.setPosition(clickedCoordinate);
-                        overlayFeatureName.innerHTML = "<h3>" + clickedFeatureName + "</h3>";
-                        overlayFeatureContent.innerHTML = "<p>" + clickedFeatureContent + "</p>";
-                        overlayFeatureCategory.innerHTML = "<p><i>Kategorie: "+ clickedFeatureCategory + "</i></p>";
-                        // Create image URL dynamically with the ObjectID 
-                        /* overlayFeatureImage.innerHTML = "<img src='https://services.arcgis.com/Sf0q24s0oDKgX14j/arcgis/rest/services/survey123_b6e023860648421f832ce0e93ad14aec/FeatureServer/0/" +
-                        clickedFeatureID + "/attachments/" + clickedFeatureID + token +
-                        " height='200px' style = 'box-shadow: 0px 0px 5px rgba(83, 83, 83, 0.544);'>"; */
-                        overlayFeatureImage.innerHTML = "<img src='https://services.arcgis.com/Sf0q24s0oDKgX14j/arcgis/rest/services/survey123_b6e023860648421f832ce0e93ad14aec/FeatureServer/0/" +
-                        clickedFeatureID + "/attachments/" + clickedFeatureID +
-                        "' height='200px' style = 'box-shadow: 0px 0px 5px rgba(83, 83, 83, 0.544);'>";
-                    }
-                }) 
-            });
-
-        
-            // --------------- Pop Up for Gallery Images ---------------
-        
-            // link container to element in html
             const overlayContainerElement1 = document.querySelector('.ol-popup');
 
             // create overlay itself
-            const overlayLayer1 = new ol.Overlay({
-                element: overlayContainerElement1 
+            const overlayLayer = new ol.Overlay({
+                element: overlayContainerElement1
             })
-            map.addOverlay(overlayLayer1);
+            map.addOverlay(overlayLayer);
             const overlayFeatureName1 = document.getElementById('feature-name');
             const overlayFeatureContent1 = document.getElementById('feature-content');
             const overlayFeatureCategory1 = document.getElementById('feature-category');
@@ -813,7 +768,7 @@ function init () {
 
                 // On click function to read feature-at-pixel properties and fill pop-up container elements
                 map.on('click', function (e) {
-                    overlayLayer1.setPosition(undefined); 
+                    overlayLayer.setPosition(undefined);
                     map.forEachFeatureAtPixel(e.pixel, function(feature, layer){
                         if (layer === allLayer || layer === plantsLayer || layer === otherLayer || layer === lebensortLayer || layer === mobilityLayer) {
                             let clickedCoordinate = e.coordinate;
@@ -821,24 +776,22 @@ function init () {
                             let clickedFeatureContent = feature.get('Beschreibung');
                             let clickedFeatureCategory = feature.get('Zuordnung');
                             let clickedFeatureID = feature.get('ObjectID');
-                            overlayLayer1.setPosition(clickedCoordinate);
+                            overlayLayer.setPosition(clickedCoordinate);
                             overlayFeatureName1.innerHTML = "<h3>" + clickedFeatureName + "</h3>";
                             overlayFeatureContent1.innerHTML = "<p>" + clickedFeatureContent + "</p>";
                             overlayFeatureCategory1.innerHTML = "<p><i>Kategorie: "+ clickedFeatureCategory + "</i></p>";
-                        // Create image URL dynamically with the ObjectID 
+                        // Create image URL dynamically with the ObjectID
                             /* overlayFeatureImage1.innerHTML = "<img src='https://services.arcgis.com/Sf0q24s0oDKgX14j/arcgis/rest/services/survey123_b6e023860648421f832ce0e93ad14aec/FeatureServer/0/" +
                             clickedFeatureID + "/attachments/" + clickedFeatureID + token +
                             " height='200px' style = 'box-shadow: 0px 0px 5px rgba(83, 83, 83, 0.544);'>"; */
-                            overlayFeatureImage.innerHTML = "<img src='https://services.arcgis.com/Sf0q24s0oDKgX14j/arcgis/rest/services/survey123_b6e023860648421f832ce0e93ad14aec/FeatureServer/0/" +
+                            overlayFeatureImage1.innerHTML = "<img src='https://services.arcgis.com/Sf0q24s0oDKgX14j/arcgis/rest/services/survey123_b6e023860648421f832ce0e93ad14aec/FeatureServer/0/" +
                             clickedFeatureID + "/attachments/" + clickedFeatureID +
-                            "' height='200px' style = 'box-shadow: 0px 0px 5px rgba(83, 83, 83, 0.544);'>";                   
+                            "' height='200px' style = 'box-shadow: 0px 0px 5px rgba(83, 83, 83, 0.544);'>";
                         }
                 })
                 });
 
-        
-        
-        
+
             // ===================================== IMAGE GALLERY =====================================
 
 
@@ -946,14 +899,14 @@ function init () {
                 map.getView().setCenter(zoomPosition);
                 map.getView().setZoom(16);
                 // Create Pop-Up for that feature as well
-                overlayLayer1.setPosition(zoomPosition);
+                overlayLayer.setPosition(zoomPosition);
 
                 overlayFeatureName1.innerHTML = "<h3>" + requestJSON.features[imageIndex].properties.Name_deiner_Story + "</h3>";
                 overlayFeatureContent1.innerHTML = "<p>" + requestJSON.features[imageIndex].properties.Beschreibung + "</p>";
                 overlayFeatureCategory1.innerHTML = "<p><i>Kategorie: "+ requestJSON.features[imageIndex].properties.Zuordnung + "</i></p>";
                 // Create image URL dynamically with the ObjectID 
-                overlayFeatureImage.innerHTML = "<img src='https://services.arcgis.com/Sf0q24s0oDKgX14j/arcgis/rest/services/survey123_b6e023860648421f832ce0e93ad14aec/FeatureServer/0/" +
-                (imageIndex + 1) + "/attachments/" + (imageIndex + 1) +
+                overlayFeatureImage1.innerHTML = "<img src='https://services.arcgis.com/Sf0q24s0oDKgX14j/arcgis/rest/services/survey123_b6e023860648421f832ce0e93ad14aec/FeatureServer/0/" +
+                (featuresID[imageIndex]) + "/attachments/" + (featuresID[imageIndex]) +
                 "' height='200px' style = 'box-shadow: 0px 0px 5px rgba(83, 83, 83, 0.544);'>";
                 })
 
@@ -963,13 +916,13 @@ function init () {
                 map.getView().setCenter(zoomPosition);
                 map.getView().setZoom(16);
                 // Pop-Up
-                overlayLayer1.setPosition(zoomPosition);
+                overlayLayer.setPosition(zoomPosition);
                 overlayFeatureName1.innerHTML = "<h3>" + requestJSON.features[imageIndex + 1].properties.Name_deiner_Story + "</h3>";
                 overlayFeatureContent1.innerHTML = "<p>" + requestJSON.features[imageIndex + 1].properties.Beschreibung + "</p>";
                 overlayFeatureCategory1.innerHTML = "<p><i>Kategorie: "+ requestJSON.features[imageIndex + 1].properties.Zuordnung + "</i></p>";
                 // Create image URL dynamically with the ObjectID 
                 overlayFeatureImage1.innerHTML = "<img src='https://services.arcgis.com/Sf0q24s0oDKgX14j/arcgis/rest/services/survey123_b6e023860648421f832ce0e93ad14aec/FeatureServer/0/" +
-                (imageIndex + 2) + "/attachments/" + (imageIndex + 2) +
+                (featuresID[imageIndex + 1]) + "/attachments/" + (featuresID[imageIndex + 1]) +
                 "' height='200px' style = 'box-shadow: 0px 0px 5px rgba(83, 83, 83, 0.544);' >";
                 })
 
@@ -979,13 +932,13 @@ function init () {
                 map.getView().setCenter(zoomPosition);
                 map.getView().setZoom(16);
                 // Pop-Up
-                overlayLayer1.setPosition(zoomPosition);
+                overlayLayer.setPosition(zoomPosition);
                 overlayFeatureName1.innerHTML = "<h3>" + requestJSON.features[imageIndex + 2].properties.Name_deiner_Story + "</h3>";
                 overlayFeatureContent1.innerHTML = "<p>" + requestJSON.features[imageIndex + 2].properties.Beschreibung + "</p>";
                 overlayFeatureCategory1.innerHTML = "<p><i>Kategorie: "+ requestJSON.features[imageIndex + 2].properties.Zuordnung + "</i></p>";
                 // Create image URL dynamically with the ObjectID 
                 overlayFeatureImage1.innerHTML = "<img src='https://services.arcgis.com/Sf0q24s0oDKgX14j/arcgis/rest/services/survey123_b6e023860648421f832ce0e93ad14aec/FeatureServer/0/" +
-                (imageIndex + 3) + "/attachments/" + (imageIndex + 3) +
+                (featuresID[imageIndex + 2]) + "/attachments/" + (featuresID[imageIndex + 2]) +
                 "' height='200px' style = 'box-shadow: 0px 0px 5px rgba(83, 83, 83, 0.544);' >";
                 })
 
@@ -995,13 +948,13 @@ function init () {
                 map.getView().setCenter(zoomPosition);
                 map.getView().setZoom(16);
                 // Pop-Up
-                overlayLayer1.setPosition(zoomPosition);
+                overlayLayer.setPosition(zoomPosition);
                 overlayFeatureName1.innerHTML = "<h3>" + requestJSON.features[imageIndex + 3].properties.Name_deiner_Story + "</h3>";
                 overlayFeatureContent1.innerHTML = "<p>" + requestJSON.features[imageIndex + 3].properties.Beschreibung + "</p>";
                 overlayFeatureCategory1.innerHTML = "<p><i>Kategorie: "+ requestJSON.features[imageIndex + 3].properties.Zuordnung + "</i></p>";
                 // Create image URL dynamically with the ObjectID 
                 overlayFeatureImage1.innerHTML = "<img src='https://services.arcgis.com/Sf0q24s0oDKgX14j/arcgis/rest/services/survey123_b6e023860648421f832ce0e93ad14aec/FeatureServer/0/" +
-                (imageIndex + 4) + "/attachments/" + (imageIndex + 4) +
+                (featuresID[imageIndex + 3]) + "/attachments/" + (featuresID[imageIndex + 3]) +
                 "' height='200px' style = 'box-shadow: 0px 0px 5px rgba(83, 83, 83, 0.544);' >";
                 })
 
