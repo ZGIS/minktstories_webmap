@@ -221,7 +221,8 @@ function init () {
         target: 'map',
         view: new ol.View({
             center: lungauPosition,
-            zoom: 10
+            zoom: 10,
+            enableRotation: false
         })
     });
 
