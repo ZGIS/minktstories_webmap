@@ -104,6 +104,16 @@ function init () {
             src: 'static/lebensort.png'
         })
     });
+    // living spaces
+    var noliveStyle = new ol.style.Style({
+        image: new ol.style.Icon({
+            anchor: [0.5, 0.8],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'fraction',
+            scale: 0.85,
+            src: 'static/no_lebensort.png'
+        })
+    });
     // an invisible icon to be used for flashing symbols when the keyword search is used
     var invisible = new ol.style.Style({ // to be used for flashing symbols
         stroke: new ol.style.Stroke({
@@ -287,12 +297,14 @@ function init () {
                 var point = new ol.Feature({
                     geometry: new ol.geom.Point(position)
                 });
-                if (feature.properties.Zuordnung == "Positiver_Mobilitätsmoment") {
+                if (feature.properties.Zuordnung == "Positiver_Mobilitätsmoment" || feature.properties.Zuordnung == "Mobilitätsmoment (positiv)") {
                     point.setStyle(pMobStyle)
-                } else if (feature.properties.Zuordnung == "Negativer_Mobilitätsmoment") {
+                } else if (feature.properties.Zuordnung == "Negativer_Mobilitätsmoment" || feature.properties.Zuordnung == "Mobilitätsmoment (negativ)") {
                     point.setStyle(nMobStyle)
-                } else if (feature.properties.Zuordnung == "Lebensort") {
+                } else if (feature.properties.Zuordnung == "Lebensort" || feature.properties.Zuordnung == "Lebensort (positiv)") {
                     point.setStyle(liveStyle);
+                } else if (feature.properties.Zuordnung == "Lebensort (negativ)") {
+                    point.setStyle(noliveStyle);
                 } else if (feature.properties.Zuordnung == "Heilpflanze") {
                     point.setStyle(plantStyle);
                 } else if (feature.properties.Zuordnung == "other") {
@@ -308,12 +320,12 @@ function init () {
                 var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
 
                 // single mobility layer, contains both positive and negative mobility features
-                if (feature.properties.Zuordnung == "Positiver_Mobilitätsmoment" || feature.properties.Zuordnung == "Negativer_Mobilitätsmoment") {
+                if (feature.properties.Zuordnung == "Positiver_Mobilitätsmoment" || feature.properties.Zuordnung == "Mobilitätsmoment (positiv)" || feature.properties.Zuordnung == "Negativer_Mobilitätsmoment" || feature.properties.Zuordnung == "Mobilitätsmoment (negativ)") {
                     var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
                     var point = new ol.Feature({
                     geometry: new ol.geom.Point(position)
                     });
-                    if (feature.properties.Zuordnung == "Positiver_Mobilitätsmoment") {
+                    if (feature.properties.Zuordnung == "Positiver_Mobilitätsmoment" || feature.properties.Zuordnung == "Mobilitätsmoment (positiv)") {
                         point.setStyle(pMobStyle)
                     } else {
                         point.setStyle(nMobStyle)
@@ -323,12 +335,16 @@ function init () {
                 }
             
                 // layer for living spaces
-                else if (feature.properties.Zuordnung == "Lebensort") {
+                else if (feature.properties.Zuordnung == "Lebensort" || feature.properties.Zuordnung == "Lebensort (positiv)" || feature.properties.Zuordnung == "Lebensort (negativ)") {
                     var position = ([feature.geometry.coordinates[0], feature.geometry.coordinates[1]]);
                     var point = new ol.Feature({
                     geometry: new ol.geom.Point(position)
                     }); //Feature
-                    point.setStyle(liveStyle);
+                    if (feature.properties.Zuordnung == "Lebensort" || feature.properties.Zuordnung == "Lebensort (positiv)") {
+                        point.setStyle(liveStyle);
+                    } else {
+                        point.setStyle(noliveStyle);
+                    }
                     lebensort.addFeature(point);
                     point.setProperties(feature.properties);
                 } 
@@ -671,6 +687,15 @@ function init () {
                     src: 'static/lebensort.png'
                 })
             });
+            var noliveStyle1 = new ol.style.Style({
+                image: new ol.style.Icon({
+                    anchor: [0.5, 0.8],
+                    anchorXUnits: 'fraction',
+                    anchorYUnits: 'fraction',
+                    scale: 1.2,
+                    src: 'static/no_lebensort.png'
+                })
+            });
 
             let selected = null;
             const status = document.getElementById('status');
@@ -703,6 +728,10 @@ function init () {
                         if (hoverFeature == "Lebensort") {
                             selected.setStyle(liveStyle1)
                             beforeStyle = liveStyle;
+                        }
+                        if (hoverFeature == "Lebensort (negativ)") {
+                            selected.setStyle(noliveStyle1)
+                            beforeStyle = noliveStyle;
                         }
                         if (hoverFeature == "Positiver_Mobilitätsmoment") {
                             selected.setStyle(pMobStyle1)
