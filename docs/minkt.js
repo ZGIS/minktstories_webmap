@@ -725,7 +725,7 @@ function init () {
                             selected.setStyle(plantStyle1)
                             beforeStyle = plantStyle;
                         }
-                        if (hoverFeature == "Lebensort") {
+                        if (hoverFeature == "Lebensort" || hoverFeature == "Lebensort (positiv)") {
                             selected.setStyle(liveStyle1)
                             beforeStyle = liveStyle;
                         }
